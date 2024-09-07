@@ -10,7 +10,7 @@ import zlib
 from io import BytesIO
 from functools import wraps
 from typing import Optional, Tuple
-from src import info, silent_error, error, RATE_LIMIT_INTERVAL, CF_IDENTIFIER, CF_API_TOKEN
+from src import info, silent_error, error, RATE_LIMIT_INTERVAL, CF_IDENTIFIER, CF_API_TOKEN, CF_EMAIL
 
 class HTTPException(Exception):
     pass
@@ -22,6 +22,7 @@ def cloudflare_gateway_request(method: str, endpoint: str, body: Optional[str] =
     headers = {
         "Authorization": f"Bearer {CF_API_TOKEN}",
         "Content-Type": "application/json",
+        "X-Auth-Email": f"{CF_EMAIL}",
         "Accept-Encoding": "gzip, deflate"
     }
 
